@@ -1,0 +1,367 @@
+set $mod Mod4
+
+set $font  fontawesome
+#System San Francisco Display
+set $font_size 9
+font pango:$font  $font_size
+
+
+bindsym $mod+Return exec konsole
+#lxterminal
+
+hide_edge_borders both
+
+workspace_auto_back_and_forth yes
+
+bindsym $mod+b workspace back_and_forth
+
+bindsym $mod+q kill
+#kill al the window on a specific workspace
+bindsym $mod+Control+Shift+k focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, kill
+
+#::::::::::::: dmenu_window :::::::::::::#
+#start rofi run
+	bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding  325 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
+
+#start rofi dmenu
+	bindsym $mod+shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -lines 3 -eh 2 -width 100 -padding  325 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"'
+##############################################
+
+
+#::::::::::::: focus_window :::::::::::::#
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+##############################################
+
+#::::::::::::: layout_containers :::::::::::::#
+# split in horizontal orientation
+bindsym $mod+g split h
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+# focus the child container
+#bindsym $mod+d focus child
+
+floating_modifier $mod
+
+focus_follows_mouse no
+
+##############################################
+
+#::::::::::::: workspaces :::::::::::::#
+#                                    
+
+#variables workspaces
+set $workspace1 "1: "
+set $workspace2 "2: "
+set $workspace3 "3: "
+set $workspace4 "4: "
+set $workspace5 "5: "
+set $workspace6 "6: "
+set $workspace7 "7: "
+set $workspace8 "8: "
+set $workspace9  "9: "
+set $workspace10 "10: "
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+#workspace $workspace4 output HDMI-1
+#move $workspace1 to HDMI-1
+
+##############################################
+
+
+#::::::::::::: applications_on_specific_workspaces :::::::::::::#
+assign [class ="QuiteRss"] $workspace9
+assign [class ="Atom"] $workspace2
+assign [class ="mpv"] $workspace8
+assign [class ="vlc"] $workspace8
+assign [class ="Anki"] $workspace9
+##############################################
+
+#::::::::::::: multiple_monitors ::::::::::::::::::::::::::::::::::::::::::::::::#
+ #workspace "10: " output VGA1
+
+
+#browser popups
+	for_window [window_role="pop-up"] floating enable, move absolute center
+
+#windows (xprop)
+for_window [class="Atom|X-terminal-emulator|Chromium-browser|Lxterminal|Gpick|Sublime_text|Code|LightTable|Gedit|konsole|Remarkable|Anki|Brackets"] border pixel 1
+for_window [class="Wicd-client.py|Lxappearance|Arandr|^File-roller$|Gpick"] floating enable
+#for_window [class="(?i)VirtualBox"] floating enable border normal,move absolute center
+for_window [class="Tk"] floating enable border normal,move absolute center
+for_window [class="Gpick"]  floating_maximum_size 50x50
+floating_maximum_size 900 x 900
+
+#autostart
+#exec --no-startup-id atom &
+	#exec --no-startup-id i3-msg 'workspace $workspace10;exec  remarkable /home/joelerll/Documents/read.md;; workspace $workspace1'
+	#exec --no-startup-id i3-msg 'workspace $workspace9;exec  anki && wait 5'
+	exec --no-startup-id i3-msg 'workspace $workspace1'
+
+
+#Walpaper
+	exec_always feh --bg-scale /home/joelerll/.wallpapers/GayMostrón.png
+
+#keybindings
+
+#tranparencia
+	exec_always compton -f
+
+#toggle border none
+	bindsym $mod+u border none
+	bindsym $mod+Shift+c reload
+	bindsym $mod+Shift+r restart
+
+#i3-save-tree --workspace 4  > ~/.i3_layouts/workspace_4.json
+#i3-msg "workspace $workspace1; append_layout /home/joelerll/.i3_layouts/workspace_4.json"
+
+#::::::::::::: modes :::::::::::::#
+
+bindsym $mod+r mode ""
+mode "" {
+	set $NUM 2
+    bindsym h resize shrink width $NUM px or $NUM ppt
+    bindsym j resize grow height $NUM px or $NUM ppt
+    bindsym k resize shrink height $NUM px or $NUM ppt
+    bindsym l resize grow width $NUM px or $NUM ppt
+
+    bindsym Left resize shrink width $NUM px or $NUM ppt
+    bindsym Down resize grow height $NUM px or $NUM ppt
+    bindsym Up resize shrink height $NUM px or $NUM ppt
+    bindsym Right resize grow width $NUM px or $NUMq ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+set $mode_launcher [f]irefox-dev | [q]utebrowser
+bindsym $mod+o mode "$mode_launcher"
+mode "$mode_launcher" {
+	bindsym f exec firefox-dev, mode "default"
+	bindsym q exec qutebrowser, mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+set $power_mode power= p :   |  r :   |  e :   | s :  | x: suspend
+bindsym $mod+Shift+q mode "$power_mode"
+mode "$power_mode" {
+	bindsym p exec systemctl poweroff
+	bindsym r exec systemctl reboot
+	bindsym x exec systemctl suspend
+	bindsym e exec i3-msg exit
+	bindsym s exec i3lock -i $HOME/.wallpapers/tengen.png , mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+set $screenshot_mode capture= [r]egion | [d]esktop | [w]indow
+bindsym $mod+Shift+s mode "$screenshot_mode"
+mode "$screenshot_mode" {
+	bindsym --release r exec --no-startup-id "file=$(cd ~/pictures/screenshots && ls -1 | wc -l) && import $HOME/pictures/screenshots/screenshot-$(($file+1))-region-$(date +%H).png && sleep 1 && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/screenshot-$(($file+1))-region-$(date +%H).png", mode "default"
+
+	bindsym --release d exec --no-startup-id "file=$(cd ~/pictures/screenshots && ls -1 | wc -l) && import -window root $HOME/Pictures/screenshots/screenshot-$(($file+1))-desktop-$(date +%H).png && sleep 1 && xclip -selection clipboard -t image/png -i ~/pictures/screenshots/screenshot-$(($file+1))-desktop-$(date +%H).png", mode "default"
+
+	bindsym --release w exec --no-startup-id "file=$(cd ~/pictures/screenshots && ls -1 | wc -l) && import -screen $HOME/pictures/screenshots/screenshot-$(($file+1))-window-$(date +%H).png && sleep 1 && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/screenshot-$(($file+1))-window-$(date +%H).png", mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+set $pcmanfm_mode pcmanfm= [d]ownloads | [h]ome | [e]spol | [t]raining | [b]ooks | [p]royects | [t]raining | [s]creenshots | [m]usic
+bindsym $mod+p mode "$pcmanfm_mode"
+mode "$pcmanfm_mode" {
+	bindsym d exec pcmanfm ~/Downloads, mode "default"
+	bindsym e exec pcmanfm ~/Documents/espol, mode "default"
+	bindsym t exec pcmanfm ~/Documents/training, mode "default"
+	bindsym b exec pcmanfm ~/Documents/books, mode "default"
+	bindsym p exec pcmanfm ~/Documents/proyects, mode "default"
+	bindsym t exec pcmanfm ~/Documents/training, mode "default"
+	bindsym s exec pcmanfm ~/Pictures/screenshots, mode "default"
+	bindsym t exec pcmanfm ~/Music, mode "default"
+	bindsym h exec pcmanfm ~/, mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+set $browser chromium-browser
+set $chromium_mode [g]oogle  | [m]edium  | git[l]ab | git[h]ub  | git[t]er | [y]outube  | [d]rive | [r]eddit
+bindsym $mod+c mode "$chromium_mode"
+mode "$chromium_mode" {
+	bindsym g exec $browser www.google.com, mode "default"
+	bindsym m exec $browser www.medium.com, mode "default"
+	bindsym h exec $browser www.github.com, mode "default"
+	bindsym l exec $browser www.gitlab.com, mode "default"
+	bindsym y exec $browser www.youtube.com, mode "default"
+	bindsym t exec $browser www.gitter.im, mode "default"
+	bindsym d exec $browser drive.google.com/drive/my-drive, mode "default"
+	bindsym r exec $browser www.reddit.com, mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+set $monitor  VGA1
+set $laptop LVDS1
+bindsym $mod+m move workspace to output left
+set $multimonitor_mode  monitores= [d]ual | [l]eft |  [r]igth |[e]xit |mod+m
+bindsym $mod+Shift+m  mode "$multimonitor_mode"
+mode "$multimonitor_mode" {
+	bindsym d exec xrandr --output $monitor --auto --same-as $laptop, mode "default"
+	bindsym l exec xrandr --output $monitor --auto --left-of $laptop, mode "default"
+	bindsym r exec xrandr --output $monitor --auto --right-of $laptop, mode "default"
+	bindsym e exec xrandr --output LVDS-1 --auto --output  VGA1 --off, mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+set $text_editors_mode [a]tom | [q]sublime3 | [w]sublime2 | [c]ode | a[r]duino | [f]ritzing
+bindsym $mod+t mode " $text_editors_mode"
+mode " $text_editors_mode" {
+	bindsym a exec atom, mode "default"
+	bindsym q exec sublime3, mode "default"
+	bindsym w exec sublime2, mode "default"
+	bindsym c exec code, mode "default"
+	bindsym l exec ligth, mode "default"
+	bindsym r exec ~/extra/arduino-1.6.12/arduino, mode "default"
+	bindsym f exec ~/extra/fritzing-0.9.3b.linux.AMD64/Fritzing, mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+#bindsym $mod+Tab focus output left
+#workspace $workspace10 output  $monitor
+##############################################
+
+#Colores
+set $bg-color 	        	 	#173e43
+set $inactive-bg-color  	 	#173e43
+set $text-color					#fae594
+set $inactive-text-color 		#dddfd4
+set $urgent-bg-color	 		#3fb0ac
+
+# window colors
+#                      		border              	background         		text                 		indicator
+client.focused         	 	$bg-color          		$bg-color          		$text-color          		#00ff00
+client.unfocused        	$inactive-bg-color	 	$inactive-bg-color 		$inactive-text-color 		#00ff00
+client.focused_inactive		$inactive-bg-color	 	$inactive-bg-color 		$inactive-text-color 		#00ff00
+client.urgent 				$urgent-bg-color 		$urgent-bg-color 		$text-color 				#00ff00
+
+bar {
+    font pango:  $font $font_size
+    tray_output $laptop
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+
+	separator_symbol ":|:"
+	colors {
+		background $bg-color
+	    separator #fae594
+		#                  		border				background				text
+		focused_workspace  		$bg-color         	$bg-color				$text-color
+		inactive_workspace 		$inactive-bg-color	$inactive-bg-color		$inactive-text-color
+		urgent_workspace   		$bg-color			$bg-color				$inactive-text-color
+	}
+	position top
+	#tray_output LVDS-1 #porsi no valga
+	output $laptop
+}
+#applet internet
+exec--no-startup-id nm-applet
+
+# Pulse Audio controls pavucontrol
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+bindsym $mod+shift+F3 exec xbacklight -inc 2 #increase screen brightness
+bindsym $mod+shift+F2 exec xbacklight -dec 2 #decrease screen brightness
+
+# Media player controls
+bindsym $mod+shift+F7  exec playerctl play
+bindsym $mod+shift+p exec playerctl pause
+bindsym $mod+shift+F8 exec playerctl next
+bindsym $mod+shift+F6 exec playerctl previous
+
+
+
+#applet blue
+#exec--no-startup-id blueman-applet
+
+#key indicators
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+## reload nm-applet
+bindsym $mod+Shift+n exec gksu  service network-manager restart
+
+
+#TODO
+# cambio de fondo de pantalla automatico
+
+
+exec_always xbacklight  -set 30
