@@ -1,0 +1,143 @@
+"*":
+  core:
+    autoHideMenuBar: true
+    customFileTypes:
+      "source.ini": [
+        ".buckconfig"
+        ".hgrc"
+      ]
+      "source.json": [
+        ".arcconfig"
+        "BUCK.autodeps"
+      ]
+      "source.python": [
+        "BUCK"
+      ]
+    disabledPackages: [
+      "nuclide"
+      "atom-keyboard-macros"
+      "nodejs-snippets"
+      "atom-keyboard-macros-vim"
+      "minimap"
+      "minimap-find-and-replace"
+      "minimap-highlight-selected"
+      "wrap-guide"
+      "vim-mode"
+      "auto-indent"
+      "auto-detect-indentation"
+      "w3c-validation"
+      "quick-editor"
+    ]
+    ignoredNames: [
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      "node_modules/ .git/"
+    ]
+    packagesWithKeymapsDisabled: []
+    projectHome: "/home/joelerll/Documents"
+    telemetryConsent: "limited"
+    themes: [
+      "one-dark-ui"
+      "base16-tomorrow-dark-theme"
+    ]
+  editor:
+    fontSize: 16
+    invisibles:
+      tab: ""
+    preferredLineLength: 170
+    scrollPastEnd: true
+    showIndentGuide: true
+    softWrap: true
+    tabType: "hard"
+  emmet:
+    useEmmetComments: true
+  "exception-reporting":
+    userId: "c8e04c21-e10d-b3d0-7da9-a0d9a04f2244"
+  minimap:
+    plugins:
+      "find-and-replace": true
+      "find-and-replaceDecorationsZIndex": 0
+      "highlight-selected": false
+      "highlight-selectedDecorationsZIndex": 0
+  "multi-wrap-guide": {}
+  pigments:
+    groupPaletteColors: "by file"
+    sortPaletteColors: "by color"
+  "todo-show":
+    sortBy: "Type"
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  welcome:
+    showOnStartup: false
+".angular.html.text":
+  editor:
+    preferredLineLength: 153
+    tabLength: 4
+  "multi-wrap-guide":
+    columns: [
+      153
+    ]
+    rows: []
+".ansi.text":
+  editor:
+    preferredLineLength: 150
+    tabLength: 4
+".basic.html.text":
+  editor:
+    preferredLineLength: 170
+    tabLength: 4
+".css.source":
+  editor:
+    preferredLineLength: 154
+  "multi-wrap-guide":
+    columns: [
+      154
+    ]
+".hack.html.text":
+  editor:
+    preferredLineLength: 150
+    tabLength: 4
+".hackfragment.source":
+  editor:
+    preferredLineLength: 150
+    tabLength: 4
+".hg-commit.text":
+  editor:
+    preferredLineLength: 150
+    tabLength: 4
+".js.regexp.replacement.source":
+  editor:
+    preferredLineLength: 170
+    tabLength: 4
+".js.regexp.source":
+  editor:
+    preferredLineLength: 170
+    tabLength: 4
+".js.source":
+  editor:
+    preferredLineLength: 170
+    tabLength: 4
+".null-grammar.plain.text":
+  editor:
+    preferredLineLength: 177
+  "multi-wrap-guide":
+    columns: [
+      177
+    ]
+".plain.text":
+  editor:
+    preferredLineLength: 152
+  "multi-wrap-guide":
+    columns: [
+      152
+    ]
+".text.xml":
+  editor:
+    preferredLineLength: 179
+  "multi-wrap-guide":
+    columns: [
+      179
+    ]
