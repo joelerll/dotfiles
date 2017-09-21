@@ -1,4 +1,9 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "editor.fontSize": 12
+    "editor.fontSize": 16,
+    "workbench.colorTheme": "Abyss",
+    "window.zoomLevel": 0,
+    "workbench.iconTheme": "vscode-icons",
+    "editor.renderIndentGuides": false,
+    "atomKeymap.promptV3Features": true
 }

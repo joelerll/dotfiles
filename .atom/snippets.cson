@@ -2,3 +2,19 @@
   'console.log':
     'prefix': 'l'
     'body': 'console.log(`${1:}`);$2'
+
+'.source.js':
+  'new Promise':
+    'prefix': 'prom'
+    'body':  """
+      return new Promise((resolve, reject) => {
+        ${1:}
+      })$2
+      """
+
+'.source.ruby.gemfile':
+  'Rails debug':
+    'prefix': 'debug'
+    'body': """
+	    Rails.logger.debug("\\033[32m#\{${1:\}.inspect\}\\033[0m")$2
+	    """

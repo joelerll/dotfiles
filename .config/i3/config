@@ -1,106 +1,141 @@
+# ================== #
+# Configuraciones globales
+# ================== #
+workspace_layout tabbed
+hide_edge_borders both
+workspace_auto_back_and_forth yes
+focus_follows_mouse no
+smart_gaps on
+
+# ================== #
+# variables globales
+# ================== #
+set $monitor VGA1 
+set $laptop LVDS1
+set $hdmi HDMI1
 set $mod Mod4
 
-set $font  fontawesome
-#System San Francisco Display
+# colors
+set $bg-color 	        	 	#173e43
+set $inactive-bg-color  	 	#173e43
+set $text-color				    #fae594
+set $inactive-text-color 		#dddfd4
+set $urgent-bg-color	 		#3fb0ac
+
+# ================== #
+# fonts config
+# ================== #
+set $font fontawesome
 set $font_size 9
-font pango:$font  $font_size
+font pango: $font  $font_size
+
+# ================== #
+# rofi config
+# ================== #
+bindsym $mod+d exec rofi -show run -lines 5 -eh 2 -width 100 -padding 200 -opacity "50"  -font "Hack 18"
+bindsym $mod+shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -lines 5 -eh 2 -width 100 -padding  200 -opacity "50" -font "Hack 18"'
+
+# ================= #
+# shortcuts
+# ================= #
+
+# aplicaciones
+bindsym $mod+Return exec termite -c ~/.config/termite/config
+bindsym $mod + shift + f exec i3-msg "exec firefox-nightly"
 
 
-bindsym $mod+Return exec konsole
-#lxterminal
+# Volume control
+bindsym F10 exec pactl set-sink-volume 0 +5%
+bindsym F9 exec pactl set-sink-volume 0 -5%
+bindsym F11 exec pactl set-sink-mute 0 toggle
 
-hide_edge_borders both
+# Sreen brightness controls
+bindsym F3 exec xbacklight -inc 2 #increase screen brightness
+bindsym F2 exec xbacklight -dec 2 #decrease screen brightness
 
-workspace_auto_back_and_forth yes
+# Media player controls
+bindsym $mod+shift+F7  exec playerctl play
+bindsym $mod+shift+p exec playerctl pause
+bindsym $mod+shift+F8 exec playerctl next
+bindsym $mod+shift+F6 exec playerctl previous
+
+# reload nm-applet
+bindsym $mod+Shift+n exec gksu  service network-manager restart
+
+# key indicators
+#bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+#bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+
+# make the currently focused window a scratchpad
+#bindsym $mod+Shift+minus move scratchpad
+#bindsym $mod+minus scratchpad show
+
+# Pulse Audio controls pavucontrol
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 bindsym $mod+b workspace back_and_forth
-
 bindsym $mod+q kill
-#kill al the window on a specific workspace
-bindsym $mod+Control+Shift+k focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, kill
+bindsym $mod+Control+Shift+k focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, focus parent, kill #kill al the window on a specific workspace
 
-#::::::::::::: dmenu_window :::::::::::::#
-#start rofi run
-	bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding  325 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
-
-#start rofi dmenu
-	bindsym $mod+shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -lines 3 -eh 2 -width 100 -padding  325 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"'
-##############################################
-
-
-#::::::::::::: focus_window :::::::::::::#
-# change focus
+# focus_window
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+#bindsym $mod+Left focus left
+#bindsym $mod+Down focus down
+#bindsym $mod+Up focus up
+#bindsym $mod+Right focus right
 
-# move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-##############################################
+#bindsym $mod+Shift+Left move left
+#bindsym $mod+Shift+Down move down
+#bindsym $mod+Shift+Up move up
+#bindsym $mod+Shift+Right move right
 
-#::::::::::::: layout_containers :::::::::::::#
-# split in horizontal orientation
-bindsym $mod+g split h
-# split in vertical orientation
-bindsym $mod+v split v
+#bindsym $mod+g split h
+bindsym $mod+Control+v split v
 
-# enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
 bindsym $mod+a focus parent
-# focus the child container
 #bindsym $mod+d focus child
 
 floating_modifier $mod
 
-focus_follows_mouse no
+bindsym $mod+u border none
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
 
-##############################################
-
-#::::::::::::: workspaces :::::::::::::#
-#                                        
-
-#variables workspaces
+# ================= #
+# workspaces
+# ================= #
 set $workspace1 "1: "
 set $workspace2 "2: "
-set $workspace3 "3: "
-set $workspace4 "4: "
-set $workspace5 "5: "
-set $workspace6 "6:  "
-set $workspace7 "7: "
-set $workspace8 "8: "
-set $workspace9  "9:  "
-set $workspace10 "10:   "
+set $workspace3 "3: "
+set $workspace4 "4: "
+set $workspace5 "5: "
+set $workspace6 "6: "
+set $workspace7 "7: inteligencia artificial"
+set $workspace8 "8: seguridad informacion"
+set $workspace9 "9: ingenieria software"
+set $workspace10 "10: interaccion hombre computador"
 
-# switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
@@ -112,7 +147,6 @@ bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace10
 
-# move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
@@ -124,61 +158,48 @@ bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 
-#workspace $workspace4 output HDMI-1
-#move $workspace1 to HDMI-1
-
-##############################################
+bindsym $mod+m move workspace to output left
 
 
-#::::::::::::: applications_on_specific_workspaces :::::::::::::#
-assign [class ="QuiteRss"] $workspace9
-#assign [class ="Atom"] $workspace2
-assign [class ="mpv"] $workspace8
-assign [class ="vlc"] $workspace8
-assign [class ="Anki"] $workspace9
-##############################################
+# ================= #
+# aplicacion to workspaces
+# ================= #
+#assign [class ="QuiteRss"] $workspace9
 
-#::::::::::::: multiple_monitors ::::::::::::::::::::::::::::::::::::::::::::::::#
- #workspace "10: " output VGA1
-
-#i3-frame
-#browser popups
-	for_window [window_role="pop-up"] floating enable, move absolute center
-
-#windows (xprop)
-for_window [class="Atom|X-terminal-emulator|Lxterminal|Gpick|Sublime_text|Code|LightTable|Gedit|konsole|Remarkable|Anki|Brackets"] border pixel 1
-for_window [class="Wicd-client.py|Lxappearance|Arandr|^File-roller$|Gpick"] floating enable
-#for_window [class="(?i)VirtualBox"] floating enable border normal,move absolute center
-for_window [class="Tk"] floating enable border normal,move absolute center
-for_window [class="Gpick"]  floating_maximum_size 50x50
-floating_maximum_size 900 x 900
-for_window[class="sun-awt-X11-XWindowPeer"] floating enable border normal
-
-#autostart
-#exec --no-startup-id atom &
-	#exec --no-startup-id i3-msg 'workspace $workspace10;exec  remarkable /home/joelerll/Documents/read.md;; workspace $workspace1'
-	#exec --no-startup-id i3-msg 'workspace $workspace9;exec  anki && wait 5'
-	exec --no-startup-id i3-msg 'workspace $workspace1'
+# ================= #
+# windows
+# ================= #
+for_window [window_role="pop-up"] floating enable, move absolute center
+for_window [class="^.*"] border pixel 0
+for_window [class="Atom|X-terminal-emulator|Lxterminal|Gpick|Sublime_text|Code|LightTable|Gedit|konsole|Remarkable|Anki|Brackets|Firefox"] border pixel 1
+for_window [class="trello.com|Chromium-browser"] floating disable
+for_window [class="Wicd-client.py|Lxappearance|Arandr|^File-roller$|Gpick|Tk|sun-awt-X11-XWindowPeer"] floating enable
 
 
+# ================= #
+# autostart apps
+# ================= #
+#exec --no-startup-id i3-msg 'workspace $workspace10;exec  remarkable /home/joelerll/Documents/read.md;; workspace $workspace1'
+
+
+# ================= #
+# defaults
+# ================= #
 #Walpaper
-	exec_always feh --bg-scale /home/joelerll/.wallpapers/GayMostrón.png
-
-#keybindings
+exec_always feh --bg-scale /home/joelerll/.wallpapers/GayMostrón.png
 
 #tranparencia
-	exec_always compton -f
+exec_always compton -f
+exec--no-startup-id nm-applet
 
-#toggle border none
-	bindsym $mod+u border none
-	bindsym $mod+Shift+c reload
-	bindsym $mod+Shift+r restart
+# MONITORS DEFAULT BRIGTHNESS
+exec_always xbacklight  -set 10
+exec_always xrandr --output $monitor --brightness 1
 
-#i3-save-tree --workspace 4  > ~/.i3_layouts/workspace_4.json
-#i3-msg "workspace $workspace1; append_layout /home/joelerll/.i3_layouts/workspace_4.json"
 
-#::::::::::::: modes :::::::::::::#
-
+# ================= #
+# modes
+# ================= #
 bindsym $mod+r mode ""
 mode "" {
 	set $NUM 2
@@ -196,14 +217,6 @@ mode "" {
     bindsym Escape mode "default"
 }
 
-set $mode_launcher [f]irefox-dev | [q]utebrowser
-bindsym $mod+o mode "$mode_launcher"
-mode "$mode_launcher" {
-	bindsym f exec firefox-dev, mode "default"
-	bindsym q exec qutebrowser, mode "default"
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
 
 set $power_mode power= p :   |  r :   |  e :   | s :  | x: suspend
 bindsym $mod+Shift+q mode "$power_mode"
@@ -217,55 +230,19 @@ mode "$power_mode" {
 	bindsym Escape mode "default"
 }
 
+
 set $screenshot_mode capture= [r]egion | [d]esktop | [w]indow
 bindsym $mod+Shift+s mode "$screenshot_mode"
 mode "$screenshot_mode" {
-	bindsym --release r exec --no-startup-id "file=$(cd ~/pictures/screenshots && ls -1 | wc -l) && import $HOME/pictures/screenshots/screenshot-$(($file+1))-region-$(date +%H).png && sleep 1 && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/screenshot-$(($file+1))-region-$(date +%H).png", mode "default"
+	bindsym --release r exec --no-startup-id "file=$(cd ~/pictures/screenshots && ls -1 | wc -l) && import $HOME/pictures/screenshots/screenshot-$(($file+1))-region-$(date +%H).png && sleep 1 && xclip -selection clipboard -t image/png -i ~/pictures/screenshots/screenshot-$(($file+1))-region-$(date +%H).png", mode "default"
 
 	bindsym --release d exec --no-startup-id "file=$(cd ~/pictures/screenshots && ls -1 | wc -l) && import -window root $HOME/Pictures/screenshots/screenshot-$(($file+1))-desktop-$(date +%H).png && sleep 1 && xclip -selection clipboard -t image/png -i ~/pictures/screenshots/screenshot-$(($file+1))-desktop-$(date +%H).png", mode "default"
 
-	bindsym --release w exec --no-startup-id "file=$(cd ~/pictures/screenshots && ls -1 | wc -l) && import -screen $HOME/pictures/screenshots/screenshot-$(($file+1))-window-$(date +%H).png && sleep 1 && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/screenshot-$(($file+1))-window-$(date +%H).png", mode "default"
+	bindsym --release w exec --no-startup-id "file=$(cd ~/pictures/screenshots && ls -1 | wc -l) && import -screen $HOME/pictures/screenshots/screenshot-$(($file+1))-window-$(date +%H).png && sleep 1 && xclip -selection clipboard -t image/png -i ~/pictures/screenshots/screenshot-$(($file+1))-window-$(date +%H).png", mode "default"
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
 
-set $pcmanfm_mode pcmanfm= [d]ownloads | [h]ome | [e]spol | [t]raining | [b]ooks | [p]royects | [t]raining | [s]creenshots | [m]usic
-bindsym $mod+p mode "$pcmanfm_mode"
-mode "$pcmanfm_mode" {
-	bindsym d exec pcmanfm ~/downloads, mode "default"
-	bindsym e exec pcmanfm ~/documents/espol, mode "default"
-	bindsym t exec pcmanfm ~/documents/training, mode "default"
-	bindsym b exec pcmanfm ~/documents/books, mode "default"
-	bindsym p exec pcmanfm ~/documents/proyects, mode "default"
-	bindsym t exec pcmanfm ~/documents/training, mode "default"
-	bindsym s exec pcmanfm ~/pictures/screenshots, mode "default"
-	bindsym t exec pcmanfm ~/music, mode "default"
-	bindsym h exec pcmanfm ~/, mode "default"
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-
-set $browser chromiun_browser
-
-set $chromium_mode [g]oogle  | [m]edium  | git[l]ab | git[h]ub  | git[t]er | [y]outube  | [d]rive | [r]eddit
-bindsym $mod+c mode "$chromium_mode"
-mode "$chromium_mode" {
-	bindsym g exec $browser www.google.com, mode "default"
-	bindsym m exec $browser www.medium.com, mode "default"
-	bindsym h exec $browser www.github.com, mode "default"
-	bindsym l exec $browser www.gitlab.com, mode "default"
-	bindsym y exec $browser www.youtube.com, mode "default"
-	bindsym t exec $browser www.gitter.im, mode "default"
-	bindsym d exec $browser drive.google.com/drive/my-drive, mode "default"
-	bindsym r exec $browser www.reddit.com, mode "default"
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-
-set $monitor  VGA1
-set $laptop LVDS1
-set $hdmi HDMI1
-bindsym $mod+m move workspace to output left
 set $multimonitor_mode  monitores= [d]ual | [l]eft |  [r]ight | d[u]al | le[f]t | r[i]ght |[e]xit |mod+m
 bindsym $mod+Shift+m  mode "$multimonitor_mode"
 mode "$multimonitor_mode" {
@@ -280,94 +257,60 @@ mode "$multimonitor_mode" {
 	bindsym Escape mode "default"
 }
 
-set $text_editors_mode [a]tom | [q]sublime3 | [w]sublime2 | [c]ode | a[r]duino | [f]ritzing
-bindsym $mod+t mode " $text_editors_mode"
-mode " $text_editors_mode" {
-	bindsym a exec atom, mode "default"
-	bindsym q exec sublime3, mode "default"
-	bindsym w exec sublime2, mode "default"
-	bindsym c exec code, mode "default"
-	bindsym l exec ligth, mode "default"
-	bindsym r exec ~/extra/arduino-1.6.12/arduino, mode "default"
-	bindsym f exec ~/extra/fritzing-0.9.3b.linux.AMD64/Fritzing, mode "default"
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+mode "$mode_gaps" {
+    bindsym o      mode "$mode_gaps_outer"
+    bindsym i      mode "$mode_gaps_inner"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
-#bindsym $mod+Tab focus output left
-#workspace $workspace10 output  $monitor
-##############################################
+mode "$mode_gaps_inner" {
+    bindsym plus  gaps inner current plus 5
+    bindsym minus gaps inner current minus 5
+    bindsym 0     gaps inner current set 0
 
-#Colores
-set $bg-color 	        	 	#173e43
-set $inactive-bg-color  	 	#173e43
-set $text-color					#fae594
-set $inactive-text-color 		#dddfd4
-set $urgent-bg-color	 		#3fb0ac
+    bindsym Shift+plus  gaps inner all plus 5
+    bindsym Shift+minus gaps inner all minus 5
+    bindsym Shift+0     gaps inner all set 0
 
-# window colors
-#                      		border              	background         		text                 		indicator
-client.focused         	 	$bg-color          		$bg-color          		$text-color          		#00ff00
-client.unfocused        	$inactive-bg-color	 	$inactive-bg-color 		$inactive-text-color 		#00ff00
-client.focused_inactive		$inactive-bg-color	 	$inactive-bg-color 		$inactive-text-color 		#00ff00
-client.urgent 				$urgent-bg-color 		$urgent-bg-color 		$text-color 				#00ff00
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+    bindsym plus  gaps outer current plus 5
+    bindsym minus gaps outer current minus 5
+    bindsym 0     gaps outer current set 0
 
+    bindsym Shift+plus  gaps outer all plus 5
+    bindsym Shift+minus gaps outer all minus 5
+    bindsym Shift+0     gaps outer all set 0
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
+# ================= #
+# bar config
+# ================= #
 bar {
-    font pango:  $font $font_size
-    tray_output $laptop
-    status_command i3blocks -c ~/.config/i3/i3blocks.conf
-
-	separator_symbol ":|:"
-	colors {
-		background $bg-color
-	    separator #fae594
-		#                  		border				background				text
-		focused_workspace  		$bg-color         	$bg-color				$text-color
-		inactive_workspace 		$inactive-bg-color	$inactive-bg-color		$inactive-text-color
-		urgent_workspace   		$bg-color			$bg-color				$inactive-text-color
-	}
+    #font pango:  $font $font_size
+    #output $laptop
+	tray_output $laptop
 	position top
-	#tray_output LVDS-1 #porsi no valga
-	#output $laptop
+	separator_symbol "|"
+    status_command py3status --include ~/.config/i3/py3status -c ~/.config/i3/i3status.conf
+	colors {
+		separator #fae594
+	}
 }
-#applet internet
-exec--no-startup-id nm-applet
 
-# Pulse Audio controls pavucontrol
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-
-# Sreen brightness controls
-bindsym $mod+shift+F3 exec xbacklight -inc 2 #increase screen brightness
-bindsym $mod+shift+F2 exec xbacklight -dec 2 #decrease screen brightness
-
-# Media player controls
-bindsym $mod+shift+F7  exec playerctl play
-bindsym $mod+shift+p exec playerctl pause
-bindsym $mod+shift+F8 exec playerctl next
-bindsym $mod+shift+F6 exec playerctl previous
-
-
-
-#applet blue
-#exec--no-startup-id blueman-applet
-
-#key indicators
-bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
-bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
-
-# Make the currently focused window a scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the first scratchpad window
-bindsym $mod+minus scratchpad show
-
-## reload nm-applet
-bindsym $mod+Shift+n exec gksu  service network-manager restart
-
-
-#TODO
-# cambio de fondo de pantalla automatico
-
-
-exec_always xbacklight  -set 15
+### TODO
+# scratchpad ranger
+# bajar brillo hdmi o vga
+# detectar un monitor y colocarlo a la izquierda automatico
+# i3 blockear con background image
+# musica fondo youtube python commandline

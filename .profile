@@ -43,6 +43,8 @@ alias dot='/usr/bin/git --git-dir=/home/joelerll/.cfg/ --work-tree=/home/joelerl
 export SCALA_HOME=$HOME/extra/scala-2.11.8 
 export PATH=$PATH:$SCALA_HOME/bin
 
+export PATH=/home/joelerll/extras/phantomjs-2.1.1-linux-x86_64/bin:$PATH
+
 export PATH=/home/joelerll/.anaconda/anaconda_python2/bin:$PATH
 
 export PATH=/home/joelerll/.anaconda/anaconda_python3/bin:$PATH
@@ -54,7 +56,16 @@ export GOPATH=$HOME/.go_path
 export PKG_CONFIG_PATH=$GOPATH/src/github.com/limetext/rubex
 export PATH=$PATH:$GOROOT/bin
 export GODEBUG=cgocheck=0 
-
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+export JAVA_HOME=/opt/java/jdk1.8.0_121/	
+export JRE_HOME=/opt/java/jdk1.8.0_121/jre 	
+export PATH=$PATH:/opt/java/jdk1.8.0_121/bin:/opt/java/jdk1.8.0_121/jre/bin
+
+
+# pywal
+(wal -r -t &)
+
+export PATH="$HOME/.cargo/bin:$PATH"

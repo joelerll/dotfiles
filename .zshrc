@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/joelerll/.oh-my-zsh
+  export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -96,3 +96,8 @@ alias dot='/usr/bin/git --git-dir=/home/joelerll/.cfg/ --work-tree=/home/joelerl
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 source $HOME/.rvm/scripts/rvm
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+plugins=(rails git ruby vi-mode)
+
+(wal -r -t &)

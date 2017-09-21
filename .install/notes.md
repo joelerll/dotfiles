@@ -159,3 +159,6 @@ Gimp
 Krita
 
 Gehpy
+
+
+compton

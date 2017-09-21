@@ -2,6 +2,10 @@
   "atom-beautify":
     general:
       _analyticsUserId: "12d07948-9bc5-464e-b7ac-1dba983de3be"
+  "atom-package-deps":
+    ignored: [
+      "aligner"
+    ]
   core:
     autoHideMenuBar: true
     customFileTypes:
@@ -31,8 +35,12 @@
       "w3c-validation"
       "quick-editor"
       "git-plus"
-      "todo"
       "javascript-snippets"
+      "linter-gcc"
+      "terminal-plus"
+      "vim-mode-plus"
+      "atom-ctags"
+      "todo"
     ]
     ignoredNames: [
       ".git"
@@ -47,10 +55,10 @@
     telemetryConsent: "limited"
     themes: [
       "one-dark-ui"
-      "base16-tomorrow-dark-theme"
+      "seti-syntax"
     ]
   editor:
-    fontSize: 17
+    fontSize: 16
     invisibles:
       tab: ">"
     preferredLineLength: 170
@@ -58,11 +66,16 @@
     showIndentGuide: true
     showInvisibles: true
     softWrap: true
-    tabType: "hard"
+    tabType: "soft"
   emmet:
     useEmmetComments: true
   "exception-reporting":
     userId: "c8e04c21-e10d-b3d0-7da9-a0d9a04f2244"
+  "linter-gcc":
+    gccLintOnTheFly: true
+  "linter-ui-default": {}
+  "markdown-preview":
+    breakOnSingleNewline: true
   minimap:
     plugins:
       "find-and-replace": true
@@ -86,7 +99,29 @@
     locales: [
       "es-AR"
     ]
+  "split-diff":
+    diffWords: true
+    ignoreWhitespace: true
+    leftEditorColor: "red"
+    rightEditorColor: "green"
+    scrollSyncType: "Vertical + Horizontal"
   "todo-show":
+    findTheseTodos: [
+      "TODO"
+      "FIXME"
+      "CHANGED"
+      "XXX"
+      "IDEA"
+      "HACK"
+      "NOTE"
+      "REVIEW"
+      "NB"
+      "BUG"
+      "QUESTION"
+      "COMBAK"
+      "TEMP"
+      "DOCUMENTACION"
+    ]
     sortBy: "Type"
   "tree-view": {}
   welcome:
@@ -126,6 +161,9 @@
 ".hg-commit.text":
   editor:
     preferredLineLength: 150
+    tabLength: 4
+".js.rails.source source.jquery.js":
+  editor:
     tabLength: 4
 ".js.regexp.replacement.source":
   editor:
