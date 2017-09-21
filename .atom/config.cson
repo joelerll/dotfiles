@@ -1,4 +1,7 @@
 "*":
+  "atom-beautify":
+    general:
+      _analyticsUserId: "12d07948-9bc5-464e-b7ac-1dba983de3be"
   core:
     autoHideMenuBar: true
     customFileTypes:
@@ -27,14 +30,17 @@
       "auto-detect-indentation"
       "w3c-validation"
       "quick-editor"
+      "git-plus"
+      "todo"
+      "javascript-snippets"
     ]
     ignoredNames: [
+      ".git"
       ".hg"
       ".svn"
       ".DS_Store"
-      "._*"
       "Thumbs.db"
-      "node_modules/ .git/"
+      "desktop.ini"
     ]
     packagesWithKeymapsDisabled: []
     projectHome: "/home/joelerll/Documents"
@@ -44,12 +50,13 @@
       "base16-tomorrow-dark-theme"
     ]
   editor:
-    fontSize: 16
+    fontSize: 17
     invisibles:
-      tab: ""
+      tab: ">"
     preferredLineLength: 170
     scrollPastEnd: true
     showIndentGuide: true
+    showInvisibles: true
     softWrap: true
     tabType: "hard"
   emmet:
@@ -66,10 +73,22 @@
   pigments:
     groupPaletteColors: "by file"
     sortPaletteColors: "by color"
+  "spell-check":
+    addKnownWords: true
+    grammars: [
+      "source.asciidoc"
+      "source.gfm"
+      "text.git-commit"
+      "text.plain"
+      "text.plain.null-grammar"
+      "source.md"
+    ]
+    locales: [
+      "es-AR"
+    ]
   "todo-show":
     sortBy: "Type"
-  "tree-view":
-    hideVcsIgnoredFiles: true
+  "tree-view": {}
   welcome:
     showOnStartup: false
 ".angular.html.text":

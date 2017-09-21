@@ -34,6 +34,8 @@ export NVM_DIR="/home/joelerll/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export PATH=$PATH":$HOME/.scripts"
+export PATH=$PATH":$HOME/.local/bin"
+
 
 alias dot='/usr/bin/git --git-dir=/home/joelerll/.cfg/ --work-tree=/home/joelerll'
 #export DOCKER_HOST=tcp://127.0.0.1:4243

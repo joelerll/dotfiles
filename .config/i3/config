@@ -86,19 +86,19 @@ focus_follows_mouse no
 ##############################################
 
 #::::::::::::: workspaces :::::::::::::#
-#                                    
+#                                        
 
 #variables workspaces
 set $workspace1 "1: "
 set $workspace2 "2: "
 set $workspace3 "3: "
-set $workspace4 "4: "
-set $workspace5 "5: "
-set $workspace6 "6: "
+set $workspace4 "4: "
+set $workspace5 "5: "
+set $workspace6 "6:  "
 set $workspace7 "7: "
 set $workspace8 "8: "
-set $workspace9  "9: "
-set $workspace10 "10: "
+set $workspace9  "9:  "
+set $workspace10 "10:   "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -132,7 +132,7 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 
 #::::::::::::: applications_on_specific_workspaces :::::::::::::#
 assign [class ="QuiteRss"] $workspace9
-assign [class ="Atom"] $workspace2
+#assign [class ="Atom"] $workspace2
 assign [class ="mpv"] $workspace8
 assign [class ="vlc"] $workspace8
 assign [class ="Anki"] $workspace9
@@ -141,17 +141,18 @@ assign [class ="Anki"] $workspace9
 #::::::::::::: multiple_monitors ::::::::::::::::::::::::::::::::::::::::::::::::#
  #workspace "10: " output VGA1
 
-
+#i3-frame
 #browser popups
 	for_window [window_role="pop-up"] floating enable, move absolute center
 
 #windows (xprop)
-for_window [class="Atom|X-terminal-emulator|Chromium-browser|Lxterminal|Gpick|Sublime_text|Code|LightTable|Gedit|konsole|Remarkable|Anki|Brackets"] border pixel 1
+for_window [class="Atom|X-terminal-emulator|Lxterminal|Gpick|Sublime_text|Code|LightTable|Gedit|konsole|Remarkable|Anki|Brackets"] border pixel 1
 for_window [class="Wicd-client.py|Lxappearance|Arandr|^File-roller$|Gpick"] floating enable
 #for_window [class="(?i)VirtualBox"] floating enable border normal,move absolute center
 for_window [class="Tk"] floating enable border normal,move absolute center
 for_window [class="Gpick"]  floating_maximum_size 50x50
 floating_maximum_size 900 x 900
+for_window[class="sun-awt-X11-XWindowPeer"] floating enable border normal
 
 #autostart
 #exec --no-startup-id atom &
@@ -209,7 +210,7 @@ bindsym $mod+Shift+q mode "$power_mode"
 mode "$power_mode" {
 	bindsym p exec systemctl poweroff
 	bindsym r exec systemctl reboot
-	bindsym x exec systemctl suspend
+	bindsym x exec systemctl suspend, mode "default"
 	bindsym e exec i3-msg exit
 	bindsym s exec i3lock -i $HOME/.wallpapers/tengen.png , mode "default"
 	bindsym Return mode "default"
@@ -231,20 +232,21 @@ mode "$screenshot_mode" {
 set $pcmanfm_mode pcmanfm= [d]ownloads | [h]ome | [e]spol | [t]raining | [b]ooks | [p]royects | [t]raining | [s]creenshots | [m]usic
 bindsym $mod+p mode "$pcmanfm_mode"
 mode "$pcmanfm_mode" {
-	bindsym d exec pcmanfm ~/Downloads, mode "default"
-	bindsym e exec pcmanfm ~/Documents/espol, mode "default"
-	bindsym t exec pcmanfm ~/Documents/training, mode "default"
-	bindsym b exec pcmanfm ~/Documents/books, mode "default"
-	bindsym p exec pcmanfm ~/Documents/proyects, mode "default"
-	bindsym t exec pcmanfm ~/Documents/training, mode "default"
-	bindsym s exec pcmanfm ~/Pictures/screenshots, mode "default"
-	bindsym t exec pcmanfm ~/Music, mode "default"
+	bindsym d exec pcmanfm ~/downloads, mode "default"
+	bindsym e exec pcmanfm ~/documents/espol, mode "default"
+	bindsym t exec pcmanfm ~/documents/training, mode "default"
+	bindsym b exec pcmanfm ~/documents/books, mode "default"
+	bindsym p exec pcmanfm ~/documents/proyects, mode "default"
+	bindsym t exec pcmanfm ~/documents/training, mode "default"
+	bindsym s exec pcmanfm ~/pictures/screenshots, mode "default"
+	bindsym t exec pcmanfm ~/music, mode "default"
 	bindsym h exec pcmanfm ~/, mode "default"
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
 
-set $browser chromium-browser
+set $browser chromiun_browser
+
 set $chromium_mode [g]oogle  | [m]edium  | git[l]ab | git[h]ub  | git[t]er | [y]outube  | [d]rive | [r]eddit
 bindsym $mod+c mode "$chromium_mode"
 mode "$chromium_mode" {
@@ -262,14 +264,18 @@ mode "$chromium_mode" {
 
 set $monitor  VGA1
 set $laptop LVDS1
+set $hdmi HDMI1
 bindsym $mod+m move workspace to output left
-set $multimonitor_mode  monitores= [d]ual | [l]eft |  [r]igth |[e]xit |mod+m
+set $multimonitor_mode  monitores= [d]ual | [l]eft |  [r]ight | d[u]al | le[f]t | r[i]ght |[e]xit |mod+m
 bindsym $mod+Shift+m  mode "$multimonitor_mode"
 mode "$multimonitor_mode" {
 	bindsym d exec xrandr --output $monitor --auto --same-as $laptop, mode "default"
 	bindsym l exec xrandr --output $monitor --auto --left-of $laptop, mode "default"
 	bindsym r exec xrandr --output $monitor --auto --right-of $laptop, mode "default"
-	bindsym e exec xrandr --output LVDS-1 --auto --output  VGA1 --off, mode "default"
+	bindsym e exec xrandr --output $laptop --auto --output  $monitor --off, mode "default"
+	bindsym u exec xrandr --output $hdmi --auto --same-as $laptop, mode "default"
+	bindsym f exec xrandr --output $hdmi --auto --left-of $laptop, mode "default"
+	bindsym i exec xrandr --output $hdmi  --auto --right-of $laptop, mode "default"
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
@@ -321,7 +327,7 @@ bar {
 	}
 	position top
 	#tray_output LVDS-1 #porsi no valga
-	output $laptop
+	#output $laptop
 }
 #applet internet
 exec--no-startup-id nm-applet
@@ -364,4 +370,4 @@ bindsym $mod+Shift+n exec gksu  service network-manager restart
 # cambio de fondo de pantalla automatico
 
 
-exec_always xbacklight  -set 30
+exec_always xbacklight  -set 15

@@ -1,66 +1,52 @@
+" ==================================
+" Plugins Instalacion
+" ==================================
 source ~/.config/nvim/plugins
 
-"Tema
-colorscheme moriarty "termschool badwolf tender
 
-"Da mas opciones a VIM
-	set nocompatible
+" ==================================
+" Editor Config
+" ==================================
 
-"Segun el tipo de archivo, hace identado inteligente
-	filetype indent plugin on
+source ~/.vimrc
 
-"preguntar si guardar cambios
-	set confirm
+" ===================================
+" Plugins config
+" ===================================
 
-"Keyvindings
-	 "Insert new line in normal mode
-		nmap oo o<ESC>k
-		imap jj <ESC>
-  	"NerdTree
-		nnoremap <F1> :NERDTree<CR>
-		nnoremap <F2> :NERDTreeClose<CR>
-      
-		"Siempre abrir nerdtree perno no focalizarlo
-			"autocmd VimEnter * NERDTree
-			"autocmd VimEnter * wincmd p
+"Plugins config
+map <C-n> :NERDTreeToggle<CR>
 
+"ctrlP
+"let g:ctrlp_show_hidden = 1
+map <C-p> :FZF<CR>
 
-"commandline completion
-  	set wildmenu
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
-"Linea de cursor
-  	set cursorline
-  	"set cursorcolumn
+" Git
+nnoremap <c-p> :GFiles<cr>
 
 
-"Tabs control
-	set noexpandtab
-	set copyindent
-	set preserveindent
-  	syntax on
-  	set tabstop=4
-  	set shiftwidth=4
-  	set shiftround
-	set softtabstop=0
-	set smarttab
+" ================================
+" Color Schemes Configs
+" ===============================
+"colorscheme vim-material
+colorscheme badwolf
 
-"Forzar usar j,k,l,h
-	nnoremap <Left> :echoe "Use h"<CR>
-	nnoremap <Right> :echoe "Use l"<CR>
-	nnoremap <Up>:echoe "Use k" <CR>
- 	nnoremap <Down> :echoe "Use j"<CR>
 
-"Posibles
- 	"filetype on 
- 	""syntax on
- 	"set autowrite
-	 "set ruler
+" Airline
+"let g:airline_theme='material'
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+"let g:airline#extensions#symbols#branch = '⭠'
 
-"Emmet
-	let g:user_emmet_mode='n'    "only enable normal mode functions.
-	let g:user_emmet_mode='inv'  "enable all functions, which is equal to
-	let g:user_emmet_mode='a'    "enable all function in all mode.
+" Complete snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-"Diccionarios
-"nmap  :setlocal spell spelllang=es_es<cr>
-"nmap  :setlocal spell spelllang=en_en<cr>
+
+"set statusline+=%{ObsessionStatus()}
